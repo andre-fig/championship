@@ -19,4 +19,7 @@ export class Championship {
 
   @Column({ type: 'varchar', length: 255 })
   status: string;
+
+  @Column()
+  unity: number;
 }

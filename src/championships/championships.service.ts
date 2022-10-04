@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateChampionshipDto } from './dto/create-championship.dto';
 import { UpdateChampionshipDto } from './dto/update-championship.dto';
+import { Championship } from './entities/championship.entity';
 
 @Injectable()
 export class ChampionshipsService {
-  create(createChampionshipDto: CreateChampionshipDto) {
-    return 'This action adds a new championship';
+  constructor(
+    @InjectRepository(Championship)
+    private championshipsRepository: Repository<Championship>,
+  ) {}
+
+  async create(createChampionshipDto: CreateChampionshipDto) {
+    return await this.championshipsRepository.save(createChampionshipDto);
   }
 
-  findAll() {
-    return `This action returns all championships`;
+  async findAll() {
+    return await this.championshipsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} championship`;
+  async findOne(id: number) {
+    return await this.championshipsRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateChampionshipDto: UpdateChampionshipDto) {
-    return `This action updates a #${id} championship`;
+  async update(id: number, updateChampionshipDto: UpdateChampionshipDto) {
+    return await this.championshipsRepository.update(id, updateChampionshipDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} championship`;
+  async remove(id: number) {
+    return await this.championshipsRepository.delete(id);
   }
 }
