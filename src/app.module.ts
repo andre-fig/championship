@@ -10,6 +10,7 @@ import { Championship } from './championships/entities/championship.entity';
 import { UnitsModule } from './units/units.module';
 import { FieldsModule } from './fields/fields.module';
 import { Unity } from './units/entities/unity.entity';
+import { Field } from './fields/entities/field.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { Unity } from './units/entities/unity.entity';
       username: 'admin',
       password: 'password',
       database: 'championship',
-      entities: [User, Championship, Unity],
+      entities: [User, Championship, Unity, Field],
       synchronize: true,
     }),
     AuthModule,

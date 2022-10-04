@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateFieldDto } from './dto/create-field.dto';
 import { UpdateFieldDto } from './dto/update-field.dto';
+import { Field } from './entities/field.entity';
 
 @Injectable()
 export class FieldsService {
-  create(createFieldDto: CreateFieldDto) {
-    return 'This action adds a new field';
+  constructor(
+    @InjectRepository(Field)
+    private fieldsRepository: Repository<Field>,
+  ) {}
+
+  async create(createFieldDto: CreateFieldDto) {
+    return await this.fieldsRepository.save(createFieldDto);
   }
 
-  findAll() {
-    return `This action returns all fields`;
+  async findAll() {
+    return await this.fieldsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} field`;
+  async findOne(id: number) {
+    return await this.fieldsRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateFieldDto: UpdateFieldDto) {
-    return `This action updates a #${id} field`;
+  async update(id: number, updateFieldDto: UpdateFieldDto) {
+    return await this.fieldsRepository.update(id, updateFieldDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} field`;
+  async remove(id: number) {
+    return await this.fieldsRepository.delete(id);
   }
 }

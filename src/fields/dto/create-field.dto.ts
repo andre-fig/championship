@@ -1,1 +1,4 @@
-export class CreateFieldDto {}
+export class CreateFieldDto {
+  identifier: string;
+  unity: number;
+}
