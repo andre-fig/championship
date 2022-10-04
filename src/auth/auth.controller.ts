@@ -8,14 +8,14 @@ import { LocalAuthGuard } from './local-auth.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Post('register')
+  public async register(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return await this.authService.register(createUserDto);
+  }
+
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
     return this.authService.login(req.user);
-  }
-
-  @Post('register')
-  public async register(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return await this.authService.register(createUserDto);
   }
 }

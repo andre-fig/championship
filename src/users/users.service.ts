@@ -12,7 +12,7 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.findOne(createUserDto.username);
+    const user = await this.findOne(createUserDto.cpf);
 
     if (user) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
@@ -22,10 +22,10 @@ export class UsersService {
     }
   }
 
-  findOne(username: string): Promise<User> {
+  findOne(cpf: string): Promise<User> {
     return this.usersRepository.findOne({
       where: {
-        username: username,
+        cpf: cpf,
       },
     });
   }
