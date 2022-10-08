@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ChampionshipsService } from './championships.service';
 import { CreateChampionshipDto } from './dto/create-championship.dto';
@@ -30,7 +30,7 @@ export class ChampionshipsController {
     return this.championshipsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateChampionshipDto: UpdateChampionshipDto,
