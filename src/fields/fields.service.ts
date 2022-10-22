@@ -25,7 +25,8 @@ export class FieldsService {
   }
 
   async update(id: number, updateFieldDto: UpdateFieldDto) {
-    return await this.fieldsRepository.update(id, updateFieldDto);
+    await this.fieldsRepository.update(id, updateFieldDto);
+    return await this.fieldsRepository.findOne({ where: { id: id } });
   }
 
   async remove(id: number) {
