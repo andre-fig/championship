@@ -19,6 +19,7 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('validate')
   async validate(@Request() req) {
     return this.authService.validate(req.user);
