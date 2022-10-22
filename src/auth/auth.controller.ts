@@ -2,6 +2,7 @@ import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { AuthService } from './auth.service';
+import { JwtStrategy } from './jwt.strategy';
 import { LocalAuthGuard } from './local-auth.guard';
 
 @Controller('auth')
@@ -19,9 +20,9 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtStrategy)
   @Post('validate')
-  async validate(@Request() req) {
+  async validateToken(@Request() req) {
     return this.authService.validate(req.user);
   }
 }
