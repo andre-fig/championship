@@ -18,7 +18,7 @@ export class AuthController {
   @Post('login')
   async login(@Request() req) {
     const access_token = await this.authService.login(req.user);
-    const user = await (await this.authService.validate(req.user)).name;
+    const user = await await this.authService.validate(req.user);
     return { access_token, user };
   }
 
