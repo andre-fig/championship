@@ -2,7 +2,7 @@ import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { User } from 'src/users/entities/user.entity';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 
 @Controller('auth')
@@ -20,9 +20,9 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(JwtStrategy)
+  @UseGuards(JwtAuthGuard)
   @Post('validate')
-  async validateToken(@Request() req) {
-    return this.authService.validate(req.user);
+  async validate(@Body() payload: any) {
+    return await this.authService.validate(payload);
   }
 }
