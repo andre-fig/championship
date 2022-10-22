@@ -24,7 +24,7 @@ export class FieldsService {
     return await this.fieldsRepository.findOne({ where: { id: id } });
   }
 
-  async update(id: number, updateFieldDto: UpdateFieldDto) {
+  async update(id: number, updateFieldDto: UpdateFieldDto): Promise<Field> {
     await this.fieldsRepository.update(id, updateFieldDto);
     return await this.fieldsRepository.findOne({ where: { id: id } });
   }

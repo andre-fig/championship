@@ -18,4 +18,9 @@ export class AuthController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
+
+  @Post('validate')
+  async validate(@Request() req) {
+    return this.authService.validate(req.user);
+  }
 }

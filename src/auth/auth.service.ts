@@ -36,4 +36,8 @@ export class AuthService {
   async register(userDto: CreateUserDto): Promise<User> {
     return await this.usersService.create(userDto);
   }
+
+  async validate(payload: any) {
+    return await this.usersService.findOne(payload.username);
+  }
 }
