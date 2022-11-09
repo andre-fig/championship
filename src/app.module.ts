@@ -11,6 +11,7 @@ import { UnitsModule } from './units/units.module';
 import { FieldsModule } from './fields/fields.module';
 import { Unity } from './units/entities/unity.entity';
 import { Field } from './fields/entities/field.entity';
+import { PlayersModule } from './players/players.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Field } from './fields/entities/field.entity';
     ChampionshipsModule,
     UnitsModule,
     FieldsModule,
+    PlayersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
